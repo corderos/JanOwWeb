@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Reports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Reports</h2>
+<th>
+
+    <a href='@Url.Action("freeSpace")' class="btn btn-primary btn-lg">Ilość wolnych miejsc na przyszły miesiąc &raquo;</a>
+    <br />
+    <a href='@Url.Action("freeTaken")' class="btn btn-primary btn-lg">Stosunek ilości wolnych miejsc do zajętych w obecnym miesiącu  &raquo;</a>
+
+</th>

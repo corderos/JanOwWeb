@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["message"] != null)
+{
+    <h2>@TempData["message"]</h2>
+}
+else
+{
+    <h2>@WEB.Resources.Resource.Signed_Up</h2>
+}
+@Html.ActionLink(@WEB.Resources.Resource.Return, "Return", "Event")

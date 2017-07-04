@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Master";
+}
+
+<p>
+    <a href='@Url.Action("Index", "Event")' class="btn btn-primary btn-lg">@WEB.Resources.Resource.Browse_Events &raquo;</a>
+</p>
+  @if (Session["AccType"] != null)
+  {
+    <p>
+
+        <a href='@Url.Action("Reports", "Event")' class="btn btn-primary btn-lg">@WEB.Resources.Resource.Browse_Data &raquo;</a>
+
+    </p>
+    <p>
+
+        <a href='@Url.Action("Index", "Master")' class="btn btn-primary btn-lg">@WEB.Resources.Resource.Log_Out &raquo;</a>
+
+    </p>
+  }

@@ -1,0 +1,108 @@
+﻿<head>
+    <script src="@Url.Content("~/Scripts/jquery-1.10.2.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.description').click(function () {
+                
+
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("Description", "Ajax")',
+                    success: function (result) {
+                        $('#result1').html(result);
+                    }
+                });
+            });
+
+            $('.newest').click(function () {
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    url: '@Url.Action("Newest", "Ajax")',
+                    success: function (result) {
+                        var r = "<b>Nasze najnowsze wydarzenie</b>";
+                        r += "<br>Nazwa: " + result.Nazwa;
+                        if (result.Temat != null) {
+                            r += '<br>Temat: ' + result.Temat;
+                        }
+                        if (result.Opis != null) {
+                            r += '<br>Opis: ' + result.Opis;;
+                        }
+                        $('#result2').html(r);
+                    }
+                });
+            });
+
+            $('.allevents').click(function () {
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    url: '@Url.Action("AllEvents", "Ajax")',
+                    success: function (result) {
+                        var s = "<b>Nasze wydarzenia</b>";
+                        s += "<ol>";
+                        for (var i = 0; i < result.length; i++) {
+                            s += "<li>" + result[i].Nazwa + "</li>";
+                        }
+                        s += "</ol>";
+                        $('#result3').html(s);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(thrownError);
+                    }
+                });
+            });
+
+            $('.eventofid').click(function () {
+                sNumber = $("#numeros").val();
+                $.ajax({
+                    type: 'GET',
+                    data: {id: sNumber},
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    url: '@Url.Action("EventOfId", "Ajax")',
+                    success: function (result) {
+                        var t = "<h4>"+ result.Nazwa + "</h4>";
+                        if (result.Temat != null) {
+                            t += 'Temat: ' + result.Temat;
+                        }
+                        if (result.Opis != null) {
+                            t += '<br>Opis: ' + result.Opis;;
+                        }
+                        $('#result4').html(t);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(thrownError);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+@{
+    ViewBag.Title = WEB.Resources.Resource.About;
+}
+<h2>@ViewBag.Title</h2>
+
+<a href="#" class="btn btn-primary btn-lg description">@WEB.Resources.Resource.Description &raquo;</a>
+<br />
+<div id="result1"></div>
+<br />
+<a href="#" class="btn btn-primary btn-lg newest">@WEB.Resources.Resource.Newest &raquo;</a>
+<br />
+<div id="result2"></div>
+<br />
+<a href="#" class="btn btn-primary btn-lg allevents">@WEB.Resources.Resource.AllEvents &raquo;</a>
+<br />
+<div id="result3"></div> 
+
+<h3>Wpisz ID wydarzenia które chcesz zobaczyć</h3>
+<input type="number" id="numeros" min="1"/>
+<br />
+<a href="#" class="btn btn-primary btn-lg eventofid">@WEB.Resources.Resource.Show &raquo;</a>
+<br />
+<div id="result4"></div>    
+

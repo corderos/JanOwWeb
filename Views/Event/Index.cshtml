@@ -1,0 +1,92 @@
+﻿@model IEnumerable<WEB.Models.Wydarzenie>
+
+@{
+    ViewBag.Title = "Wydarzenia";
+}
+
+@Styles.Render("~/Content/Lista.css")
+<p>
+    @if (Session["AccType"] != null)
+    {
+        if ((string)@Session["AccType"] != "False")
+
+    {
+        <a href='@Url.Action("Create", "Event")' class="btn btn-primary btn-lg" > @WEB.Resources.Resource.NewEvent &raquo;</a>
+    }
+    }
+</p>
+<table class="table">
+    <tr class="row">
+        <th id="eventlist">
+            @WEB.Resources.Resource.Photo
+        </th>
+        <th id="eventlist">
+            @WEB.Resources.Resource.Name
+        </th>
+        <th id="eventlist">
+            @WEB.Resources.Resource.Subject
+        </th>
+        <th id="eventlist">
+            @WEB.Resources.Resource.Date
+        </th>
+        <th id="eventlist">
+            @WEB.Resources.Resource.Adress
+        </th>
+        <th id="eventlist">
+            @WEB.Resources.Resource.Lecturer
+        </th>
+        <th id="eventlist">
+            @WEB.Resources.Resource.Free_Place
+        </th>
+        <th id="eventlist">
+            @WEB.Resources.Resource.Action
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="row">
+            <td id="eventlist">
+                ...
+            </td>
+            <td id="eventlist">
+                @Html.DisplayFor(modelItem => item.Nazwa)
+            </td>
+            <td id="eventlist">
+                @Html.DisplayFor(modelItem => item.Temat)
+            </td>
+            <td id="eventlist">
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td id="eventlist">
+                @Html.DisplayFor(modelItem => item.Adres)
+            </td>
+            <td id="eventlist">
+                @Html.DisplayFor(modelItem => item.Prowadzacy)
+            </td>
+            <td id="eventlist">
+                @Html.DisplayFor(modelItem => item.IloscMiejsc)
+            </td>
+            <td id="eventlist">
+                @Html.ActionLink(@WEB.Resources.Resource.Details, "Details", new { id = item.Id })
+                @if (@Session["AccType"] != null)
+                {
+                    @: |
+                    @Html.ActionLink(@WEB.Resources.Resource.SignUp, "SignUp", new { id = item.Id })
+
+                    if ((string)@Session["AccType"] != "False")
+                    {
+                        @: |
+
+                        @Html.ActionLink(@WEB.Resources.Resource.Edit, "Edit", new { id = item.Id })
+                        @: |
+                        @Html.ActionLink(@WEB.Resources.Resource.Delete, "Delete", new { id = item.Id })
+                        @: |
+                        @Html.ActionLink(@WEB.Resources.Resource.Browse, "Browse", new { id = item.Id });
+                    }
+                }
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,86 @@
+﻿@model WEB.Models.Wydarzenie
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Html.DisplayFor(model => model.Nazwa)</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IloscMiejsc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IloscMiejsc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prowadzacy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prowadzacy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Temat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Temat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opis)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if ((string)@Session["AccType"] != "False" && (string)@Session["AccType"] != null) {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) @:|
+    }
+    @Html.ActionLink("Back", "Index")
+ 
+
+    @if (Session["ID"] != null)
+    {
+        if ((bool)ViewData["isSigned"])
+        {
+            @: |
+            @Html.ActionLink("Sign out", "Sign_Out", new { id = Model.Id });
+        }
+    } 
+</p>
